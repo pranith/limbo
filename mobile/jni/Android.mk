@@ -1,24 +1,25 @@
 #include $(call all-subdir-makefiles)
 
-include $(LIMBO_JNI_ROOT)/android-config.mak
+LOCAL_PATH := $(call my-dir)
+
+include $(LOCAL_PATH)/android-config.mak
+
+# $(1): List of directories to look for under this directory
+define all-named-subdir-makefiles
+$(wildcard $(addsuffix /Android.mk, $(addprefix $(call my-dir)/,$(1))))
+endef
 
 #If you want to build individual modules
-#include $(NDK_PROJECT_PATH)/jni/png/Android.mk
-#include $(NDK_PROJECT_PATH)/jni/jpeg/Android.mk
-include $(NDK_PROJECT_PATH)/jni/glib/Android.mk
-include $(NDK_PROJECT_PATH)/jni/compat/Android.mk
-#include $(NDK_PROJECT_PATH)/jni/openssl/Android.mk
-#include $(NDK_PROJECT_PATH)/jni/spice/Android.mk
+#include $(call all-named-subdir-makefiles, png jpeg)
+include $(call all-named-subdir-makefiles, glib compat)
+#include $(call all-named-subdir-makefiles, openssl spice)
 
 ifeq ($(USE_SDL),true)
-	include $(NDK_PROJECT_PATH)/jni/SDL/Android.mk
-	include $(NDK_PROJECT_PATH)/jni/SDL_image/Android.mk
-	include $(NDK_PROJECT_PATH)/jni/limbo/sdl_main/Android.mk
+    include $(call all-named-subdir-makefiles, SDL SDL_image limbo/sdl_main)
 endif
 
 ifeq ($(USE_SDL_AUDIO),true)
-	include $(NDK_PROJECT_PATH)/jni/SDL_mixer/Android.mk 
+    include $(call all-named-subdir-makefiles, SDL_mixer)
 endif
 
-include $(NDK_PROJECT_PATH)/jni/pixman/Android.mk
-include $(NDK_PROJECT_PATH)/jni/limbo/Android.mk
+include $(call all-named-subdir-makefiles, pixman limbo)

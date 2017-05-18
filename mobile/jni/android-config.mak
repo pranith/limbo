@@ -4,8 +4,8 @@
 ############## Project Config Start
 
 # IMPORTANT: Speficy the root of the project
-LIMBO_JNI_ROOT := C:/users/dev/limbo/limbo-android/jni
-LIMBO_JNI_ROOT_INC := C:/users/dev/limbo/limbo-android/jni
+LIMBO_JNI_ROOT := $(call my-dir)
+LIMBO_JNI_ROOT_INC := $(LIMBO_JNI_ROOT)
 
 # Enable KVM (NOT Tested)
 # Note: KVM headers are available only for android-21 platform and above
@@ -39,9 +39,9 @@ BUILD_THREADS=8
 # If you use Windows to build
 
 # ndk 13b for x86
-NDK_ROOT = C:/tools/bin/android-ndk-r13b-windows-x86/android-ndk-r13b
-NDK_ROOT_INC = C:/tools/bin/android-ndk-r13b-windows-x86/android-ndk-r13b
-NDK_ENV = windows
+#NDK_ROOT = C:/tools/bin/android-ndk-r13b-windows-x86/android-ndk-r13b
+#NDK_ROOT_INC = C:/tools/bin/android-ndk-r13b-windows-x86/android-ndk-r13b
+#NDK_ENV = windows
 
 # ndk 13 for 64bit
 #NDK_ROOT = C:/tools/bin/android-ndk-r13-windows-x86_64/android-ndk-r13
